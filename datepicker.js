@@ -10,7 +10,8 @@ import {
   Animated,
   Keyboard
 } from 'react-native';
-import {DatePickerAndroid, TimePickerAndroid, DatePickerIOS} from '@react-native-community/datetimepicker';
+import {DatePickerAndroid, TimePickerAndroid} from '@react-native-community/datetimepicker';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import Style from './style';
 import Moment from 'moment';
 
@@ -389,8 +390,10 @@ class DatePicker extends Component {
                     style={[Style.datePickerCon, {height: this.state.animatedHeight}, customStyles.datePickerCon]}
                   >
                     <View pointerEvents={this.state.allowPointerEvents ? 'auto' : 'none'}>
-                      <DatePickerIOS
-                        date={this.state.date}
+                      <RNDateTimePicker
+                        value={this.state.date}
+                        onChange={(_e, date) => this.onDateChange(date)}
+                        display='spinner'
                         mode={mode}
                         minimumDate={minDate && this.getDate(minDate)}
                         maximumDate={maxDate && this.getDate(maxDate)}
